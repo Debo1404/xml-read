@@ -1,4 +1,4 @@
-package com.sample.demo;
+package com.sample.xmlread;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
