@@ -1,6 +1,5 @@
 package com.sample.xmlread.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,12 +17,9 @@ public class Ir21 {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name = "DOCUMENT_NAME")
 	private String documentName;
-	
-	@Column(name = "TADIG_CODE")
+
 	private String tadIgCode;
-	
-	@Column(name = "NETWORK_NAME")
+
 	private String networkName;
 }
