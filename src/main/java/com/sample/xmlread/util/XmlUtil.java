@@ -27,21 +27,23 @@ public class XmlUtil {
 		try {
 
 			File file = new File(path);
-			String documentName = file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\")+1);
+			String documentName = file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			Document doc = db.parse(file);
 			doc.getDocumentElement().normalize();
 			NodeList ipAddrRangeNodeList = doc.getElementsByTagName(Constant.IPADDRESSORRANGE);
 			NodeList dnsItemNodeList = doc.getElementsByTagName(Constant.DNSITEM);
-			String tadigCode = doc.getElementsByTagName(Constant.TADIGCODETAG).item(0).getTextContent();
-			String networkName = doc.getElementsByTagName(Constant.NETWORKNAMETAG).item(0).getTextContent();
+			String tadigCode = doc.getElementsByTagName(Constant.TADIGCODETAG).item(0) == null ? ""
+					: doc.getElementsByTagName(Constant.TADIGCODETAG).item(0).getTextContent();
+			String networkName = doc.getElementsByTagName(Constant.NETWORKNAMETAG).item(0) == null ? ""
+					: doc.getElementsByTagName(Constant.NETWORKNAMETAG).item(0).getTextContent();
 			for (int itr = 0; itr < ipAddrRangeNodeList.getLength(); itr++) {
 				Node node = ipAddrRangeNodeList.item(itr);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) node;
 					String ipV4Value = eElement.getElementsByTagName(Constant.IPADDRESSRANGE).item(0).getTextContent();
-					IPsubnet subnet = generateRecord(tadigCode,networkName, ipV4Value, documentName);
+					IPsubnet subnet = generateRecord(tadigCode, networkName, ipV4Value, documentName);
 					recordList.add(subnet);
 				}
 			}
@@ -50,7 +52,7 @@ public class XmlUtil {
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) node;
 					String ipV4Value = eElement.getElementsByTagName(Constant.IPADDRESS).item(0).getTextContent();
-					IPsubnet subnet = generateRecord(tadigCode,networkName, ipV4Value, documentName);
+					IPsubnet subnet = generateRecord(tadigCode, networkName, ipV4Value, documentName);
 					recordList.add(subnet);
 				}
 			}

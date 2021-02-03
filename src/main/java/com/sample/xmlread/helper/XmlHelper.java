@@ -18,13 +18,7 @@ public class XmlHelper {
 		List<IPsubnetdto> subnetDtoList = new ArrayList<>();
 		for(IPsubnet subnet : ipList) {
 			if(CollectionUtils.isEmpty(subnetDtoList)) {
-				IPsubnetdto dto = new IPsubnetdto();
-				dto.setDocumentName(subnet.getIr21Id().getDocumentName());
-				dto.setNetworkName(subnet.getIr21Id().getNetworkName());
-				dto.setTadigCode(subnet.getIr21Id().getTadIgCode());
-				dto.setLastIpDate(subnet.getCreatedDate());
-				dto.setRawip(Arrays.asList(subnet.getIpV4Address()));
-				subnetDtoList.add(dto);
+				setValues(subnetDtoList, subnet);
 			} else {
 				boolean flag=false;
 				for (IPsubnetdto subnetdto : subnetDtoList) {
@@ -39,19 +33,23 @@ public class XmlHelper {
 					}
 				}
 				if(!flag) {
-					IPsubnetdto dto = new IPsubnetdto();
-					dto.setDocumentName(subnet.getIr21Id().getDocumentName());
-					dto.setNetworkName(subnet.getIr21Id().getNetworkName());
-					dto.setTadigCode(subnet.getIr21Id().getTadIgCode());
-					dto.setLastIpDate(subnet.getCreatedDate());
-					dto.setRawip(Arrays.asList(subnet.getIpV4Address()));
-					subnetDtoList.add(dto);
+					setValues(subnetDtoList, subnet);
 				}
 			}
 		}
 		return subnetDtoList;
 		
 	
+	}
+
+	private void setValues(List<IPsubnetdto> subnetDtoList, IPsubnet subnet) {
+		IPsubnetdto dto = new IPsubnetdto();
+		dto.setDocumentName(subnet.getIr21Id().getDocumentName());
+		dto.setNetworkName(subnet.getIr21Id().getNetworkName());
+		dto.setTadigCode(subnet.getIr21Id().getTadIgCode());
+		dto.setLastIpDate(subnet.getCreatedDate());
+		dto.setRawip(Arrays.asList(subnet.getIpV4Address()));
+		subnetDtoList.add(dto);
 	}
 
 }

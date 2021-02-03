@@ -7,9 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.MimeTypeUtils;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +17,6 @@ import com.sample.xmlread.response.XmlResponse;
 import com.sample.xmlread.service.XmlService;
 import com.sample.xmlread.validation.XmlValidation;
 
-import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController

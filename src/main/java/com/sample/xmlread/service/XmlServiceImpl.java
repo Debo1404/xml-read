@@ -1,12 +1,9 @@
 package com.sample.xmlread.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import com.sample.xmlread.dao.XmlRepository;
 import com.sample.xmlread.dto.IPsubnetdto;
