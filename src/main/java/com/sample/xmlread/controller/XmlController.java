@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.MimeTypeUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +30,7 @@ public class XmlController {
 	
 	@RequestMapping(value = "/xmldata/save", method = RequestMethod.POST,
 			produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-	public ResponseEntity saveData(@RequestParam(required = true) String path) {
+	public ResponseEntity saveData(@RequestBody String path) {
 		XmlValidation.validate(path);
 		try{
 			log.info("Request Received to read xml file from = {}", path);
