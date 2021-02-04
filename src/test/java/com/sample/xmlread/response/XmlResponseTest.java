@@ -9,13 +9,12 @@ public class XmlResponseTest {
 
 	@Test
 	public void getterSetterTest() {
-		XmlResponse obj = new XmlResponse("new object");
+		XmlResponse obj = new XmlResponse("new object", 200);
 		obj.getMessage();
 		obj.toString();
 		obj.hashCode();
-		obj.equals(new XmlResponse("new object"));
-		XmlResponse obj1 = new XmlResponse("different object");
-		obj.equals(obj1);
-		
+		obj.equals(new XmlResponse("new object", 200));
+		XmlResponse obj1 = new XmlResponse("different object", 200);
+		obj.equals(obj1);		
 	}
 }

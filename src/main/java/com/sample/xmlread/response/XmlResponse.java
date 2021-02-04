@@ -6,9 +6,11 @@ import lombok.Data;
 public class XmlResponse{
 
 	private String message;
+	private int statusCode;
 
-	public XmlResponse(String message){
+	public XmlResponse(String message, int statusCode){
 		this.message = message;
+		this.statusCode = statusCode;
 	}
 	
 	

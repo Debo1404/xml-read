@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.sample.xmlread.constant.Constant;
 import com.sample.xmlread.response.XmlResponse;
 
 @RestControllerAdvice
@@ -13,7 +14,7 @@ public class PathValueExceptionHandler {
 	@ExceptionHandler(PathValueException.class)
     public ResponseEntity<XmlResponse> toResponse(PathValueException ex)
     {
-		XmlResponse errorMessage=new XmlResponse(ex.getMessage());
+		XmlResponse errorMessage=new XmlResponse(ex.getMessage(), Constant.ERROR_CODE_400);
 
         return new ResponseEntity<XmlResponse>(errorMessage,HttpStatus.BAD_REQUEST);
     }
@@ -21,7 +22,7 @@ public class PathValueExceptionHandler {
 	@ExceptionHandler(FileParsingException.class)
     public ResponseEntity<XmlResponse> toResponse(FileParsingException ex)
     {
-		XmlResponse errorMessage=new XmlResponse(ex.getMessage());
+		XmlResponse errorMessage=new XmlResponse(ex.getMessage(), Constant.ERROR_CODE_500);
 
         return new ResponseEntity<XmlResponse>(errorMessage,HttpStatus.INTERNAL_SERVER_ERROR);
     }

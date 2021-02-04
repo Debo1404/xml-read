@@ -16,4 +16,8 @@ public class Constant {
 	public static final String EXTN = "xml";
 	public static final CharSequence PATH_FORMAT = ":\\";
 	public static final String NO_PARAMETER = "No parameter found";
+	public static final int ERROR_CODE_400 = 400;
+	public static final int ERROR_CODE_500 = 500;
+	public static final String SAVED = "Saved Successfully";
+	public static final int ERROR_CODE_200 = 200;
 }

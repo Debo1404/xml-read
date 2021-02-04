@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sample.xmlread.constant.Constant;
 import com.sample.xmlread.dto.IPsubnetdto;
 import com.sample.xmlread.dto.PathDto;
 import com.sample.xmlread.response.XmlResponse;
@@ -35,7 +36,7 @@ public class XmlController {
 		log.info("Request Received to read xml file from = {}", pathDto.getPath());
 		Boolean isSaved = xmlService.saveData(pathDto.getPath());
 		if (isSaved) {
-			return ResponseEntity.ok().body(new XmlResponse("Saved Successfully"));
+			return ResponseEntity.ok().body(new XmlResponse(Constant.SAVED, Constant.ERROR_CODE_200));
 		}
 
 		return ResponseEntity.noContent().build();
