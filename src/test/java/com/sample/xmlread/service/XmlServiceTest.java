@@ -51,8 +51,8 @@ public class XmlServiceTest {
 		 * Mockito.when(XmlUtil.readXml(Mockito.anyString())).thenReturn(new
 		 * ArrayList<>());
 		 */
-		boolean res = xmlService.saveData(path);
-		Assert.assertEquals(false, res);
+		Exception exception = assertThrows(RuntimeException.class, () -> xmlService.saveData(path));
+		Assert.assertEquals("C:\\testfolder\\testfile.xml (The system cannot find the path specified)", exception.getMessage());
 	}
 	
 	@Test

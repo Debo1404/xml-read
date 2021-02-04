@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.sample.xmlread.dto.PathDto;
 import com.sample.xmlread.exception.PathValueException;
 
 @ExtendWith(MockitoExtension.class)
@@ -19,13 +20,17 @@ public class XmlValidationTest {
 	@Test
 	public void validateTest() {
 		String path = "C:\\testfile.xml";
-		xmlValidation.validate(path);
+		PathDto dto = new PathDto();
+		dto.setPath(path);
+		xmlValidation.validate(dto);
 	}
 	
 	@Test
 	public void validateEmptyTest() {
 		String path = "";
-		Exception exception = assertThrows(PathValueException.class, () -> xmlValidation.validate(path));
+		PathDto dto = new PathDto();
+		dto.setPath(path);
+		Exception exception = assertThrows(PathValueException.class, () -> xmlValidation.validate(dto));
 		assertEquals("Path cannot be null or empty", exception.getMessage());
 		
 	}
@@ -33,7 +38,9 @@ public class XmlValidationTest {
 	@Test
 	public void validateInvalidPathTest() {
 		String path = "abcde";
-		Exception exception = assertThrows(PathValueException.class, () -> xmlValidation.validate(path));
+		PathDto dto = new PathDto();
+		dto.setPath(path);
+		Exception exception = assertThrows(PathValueException.class, () -> xmlValidation.validate(dto));
 		assertEquals("Invalid file path", exception.getMessage());
 		
 	}
@@ -41,7 +48,9 @@ public class XmlValidationTest {
 	@Test
 	public void validateInvalidExtensionTest() {
 		String path = "C:\\testfile.txt";
-		Exception exception = assertThrows(PathValueException.class, () -> xmlValidation.validate(path));
+		PathDto dto = new PathDto();
+		dto.setPath(path);
+		Exception exception = assertThrows(PathValueException.class, () -> xmlValidation.validate(dto));
 		assertEquals("File extension not correct", exception.getMessage());
 		
 	}

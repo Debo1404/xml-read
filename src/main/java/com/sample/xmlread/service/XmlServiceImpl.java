@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.sample.xmlread.dao.XmlRepository;
 import com.sample.xmlread.dto.IPsubnetdto;
+import com.sample.xmlread.exception.FileParsingException;
 import com.sample.xmlread.helper.XmlHelper;
 import com.sample.xmlread.model.IPsubnet;
 import com.sample.xmlread.util.XmlUtil;
@@ -29,21 +30,22 @@ public class XmlServiceImpl implements XmlService{
 	@Override
 	public Boolean saveData(String path) {
 
+		log.info("*******In XmlServiceImpl::saveData()********");
+		List<IPsubnet> list = XmlUtil.readXml(path);
 		try {
-			List<IPsubnet> list = XmlUtil.readXml(path);
 			xmlRepository.saveAll(list);
 			return true;
 		} catch (Exception e) {
 			log.error("Error in saving xml data");
 			e.printStackTrace();
-			return false;
+			throw new RuntimeException(e.getMessage());
 		}
 	}
 
 	@Override
 	public List<IPsubnetdto> getData() {
 
-		log.info("*******In XmlServiceImpl********");
+		log.info("*******In XmlServiceImpl::getData()********");
 		List<IPsubnetdto> ipdtoList = null;
 		try {
 			List<IPsubnet> ipList = (List<IPsubnet>) xmlRepository.findAll();

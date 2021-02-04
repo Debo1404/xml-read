@@ -2,11 +2,13 @@ package com.sample.xmlread.controller;
 
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.assertj.core.util.Arrays;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +20,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.sample.xmlread.dto.IPsubnetdto;
+import com.sample.xmlread.dto.PathDto;
+import com.sample.xmlread.exception.PathValueException;
 import com.sample.xmlread.service.XmlServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
@@ -33,25 +37,32 @@ public class XmlControllerTest {
 	@Test
 	public void saveDataTest() {
 		String path = "C:\\testfolder\testfile.xml";
+		PathDto dto = new PathDto();
+		dto.setPath(path);
 		Mockito.when(xmlService.saveData(Mockito.anyString())).thenReturn(true);
-		ResponseEntity res = xmlController.saveData(path);
+		ResponseEntity res = xmlController.saveData(dto);
 		Assert.assertEquals(HttpStatus.OK, res.getStatusCode());
 	}
 	
 	@Test
 	public void saveDataExceptionTest() {
-		String path = "C:\\testfolder\testfile.xml";
+		String path = "C:\\testfolder\\testfile.xml";
+		PathDto dto = new PathDto();
+		dto.setPath(path);
 		Mockito.when(xmlService.saveData(Mockito.anyString())).thenReturn(false);
-		ResponseEntity res = xmlController.saveData(path);
-		Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, res.getStatusCode());
+		ResponseEntity res = xmlController.saveData(dto);
+		Assert.assertEquals(HttpStatus.NO_CONTENT, res.getStatusCode());
 	}
 	
 	@Test
 	public void saveDataExceptionv1Test() {
-		String path = "C:\\testfolder\testfile.xml";
-		Mockito.when(xmlService.saveData(Mockito.anyString())).thenThrow(RuntimeException.class);
-		ResponseEntity res = xmlController.saveData(path);
-		Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, res.getStatusCode());
+		String path = "C:\\testfolder\\testfile.xml";
+		PathDto dto = new PathDto();
+		dto.setPath(path);
+		Mockito.when(xmlService.saveData(Mockito.anyString())).thenThrow(PathValueException.class);
+		Exception exception = assertThrows(PathValueException.class, () -> xmlController.saveData(dto));
+		//ResponseEntity res = xmlController.saveData(dto);
+		//assertEquals("Could not Fetch Data", exception.getMessage());
 	}
 	
 	@Test

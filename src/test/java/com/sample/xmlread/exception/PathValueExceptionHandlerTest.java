@@ -21,4 +21,11 @@ public class PathValueExceptionHandlerTest {
 		ResponseEntity<XmlResponse> res = pathValueExceptionHandler.toResponse(p);
 		Assert.assertEquals("test message", res.getBody().getMessage());
 	}
+	
+	@Test
+	public void fileParsingExceptionHandlerTest() {
+		FileParsingException obj = new FileParsingException("test message");
+		ResponseEntity<XmlResponse> res = pathValueExceptionHandler.toResponse(obj);
+		Assert.assertEquals("test message", res.getBody().getMessage());
+	}
 }

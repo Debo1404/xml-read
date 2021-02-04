@@ -15,4 +15,5 @@ public class Constant {
 	public static final String WRONG_EXTN = "File extension not correct";
 	public static final String EXTN = "xml";
 	public static final CharSequence PATH_FORMAT = ":\\";
+	public static final String NO_PARAMETER = "No parameter found";
 }

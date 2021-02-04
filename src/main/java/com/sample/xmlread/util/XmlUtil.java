@@ -16,7 +16,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.sample.xmlread.constant.Constant;
-import com.sample.xmlread.exception.PathValueException;
+import com.sample.xmlread.exception.FileParsingException;
 import com.sample.xmlread.model.IPsubnet;
 import com.sample.xmlread.model.Ir21;
 
@@ -58,7 +58,7 @@ public class XmlUtil {
 			}
 		} catch (Exception e) {
 			e.printStackTrace(System.err);
-			throw new PathValueException(e.getMessage());
+			throw new FileParsingException(e.getMessage());
 		}
 		return recordList;
 	}

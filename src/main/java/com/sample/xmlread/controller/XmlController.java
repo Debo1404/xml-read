@@ -10,10 +10,10 @@ import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sample.xmlread.dto.IPsubnetdto;
+import com.sample.xmlread.dto.PathDto;
 import com.sample.xmlread.response.XmlResponse;
 import com.sample.xmlread.service.XmlService;
 import com.sample.xmlread.validation.XmlValidation;
@@ -30,19 +30,16 @@ public class XmlController {
 	
 	@RequestMapping(value = "/xmldata/save", method = RequestMethod.POST,
 			produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
-	public ResponseEntity saveData(@RequestBody String path) {
-		XmlValidation.validate(path);
-		try{
-			log.info("Request Received to read xml file from = {}", path);
-			Boolean isSaved =  xmlService.saveData(path);
-			if(isSaved) {
-				return ResponseEntity.ok().body(new XmlResponse("Saved Successfully"));
-			}
-			return new ResponseEntity<>(new XmlResponse("Internal Server Error"), HttpStatus.INTERNAL_SERVER_ERROR);
-		}catch(Exception e){
-			return new ResponseEntity<>(new XmlResponse("Internal Server Error"), HttpStatus.INTERNAL_SERVER_ERROR);
+	public ResponseEntity saveData(@RequestBody PathDto pathDto) {
+		XmlValidation.validate(pathDto);
+		log.info("Request Received to read xml file from = {}", pathDto.getPath());
+		Boolean isSaved = xmlService.saveData(pathDto.getPath());
+		if (isSaved) {
+			return ResponseEntity.ok().body(new XmlResponse("Saved Successfully"));
 		}
-		
+
+		return ResponseEntity.noContent().build();
+
 	}
 	
 	@RequestMapping(value = "/xmldata/get", method = RequestMethod.GET,
