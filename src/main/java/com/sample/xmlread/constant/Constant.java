@@ -20,4 +20,6 @@ public class Constant {
 	public static final int ERROR_CODE_500 = 500;
 	public static final String SAVED = "Saved Successfully";
 	public static final int ERROR_CODE_200 = 200;
+	public static final String NO_DATA = "No data found in the file";
+	public static final String DEFAULT_MASK = "/32";
 }

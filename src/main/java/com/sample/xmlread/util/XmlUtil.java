@@ -43,8 +43,7 @@ public class XmlUtil {
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) node;
 					String ipV4Value = eElement.getElementsByTagName(Constant.IPADDRESSRANGE).item(0).getTextContent();
-					IPsubnet subnet = generateRecord(tadigCode, networkName, ipV4Value, documentName);
-					recordList.add(subnet);
+					generateRecord(tadigCode, networkName, ipV4Value, documentName,recordList);
 				}
 			}
 			for (int itr = 0; itr < dnsItemNodeList.getLength(); itr++) {
@@ -52,8 +51,7 @@ public class XmlUtil {
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 					Element eElement = (Element) node;
 					String ipV4Value = eElement.getElementsByTagName(Constant.IPADDRESS).item(0).getTextContent();
-					IPsubnet subnet = generateRecord(tadigCode, networkName, ipV4Value, documentName);
-					recordList.add(subnet);
+					generateRecord(tadigCode, networkName, ipV4Value, documentName, recordList);
 				}
 			}
 		} catch (Exception e) {
@@ -63,7 +61,7 @@ public class XmlUtil {
 		return recordList;
 	}
 
-	private static IPsubnet generateRecord(String tadigCode, String networkName, String ipV4Value, String documentName) throws UnknownHostException {
+	private static void generateRecord(String tadigCode, String networkName, String ipV4Value, String documentName, List<IPsubnet> recordList) throws UnknownHostException {
 		IPsubnet subnet = new IPsubnet();
 		Ir21 ir21 = new Ir21();
 		ir21.setNetworkName(networkName);
@@ -73,13 +71,21 @@ public class XmlUtil {
 		setIpAndMask(ipV4Value, subnet);
 		subnet.setIr21Id(ir21);
 		subnet.setCreatedDate(new Timestamp(System.currentTimeMillis()));
-		return subnet;
+		if(!checkDuplicate(recordList, subnet.getIpV4Address())) {
+			recordList.add(subnet);
+		}
 		
+	}
+
+	private static boolean checkDuplicate(List<IPsubnet> recordList, String ipV4Value) {
+		return recordList.stream()
+				.map(IPsubnet::getIpV4Address)
+				.filter(ipV4Value::equals).findFirst().isPresent();
 	}
 
 	private static void setIpAndMask(String ipV4Value, IPsubnet subnet) throws UnknownHostException {
 		if (!ipV4Value.contains("/")) {
-			ipV4Value = ipV4Value + "/32";
+			ipV4Value = ipV4Value + Constant.DEFAULT_MASK;
 		}
 
 		String[] parts = ipV4Value.split("/");

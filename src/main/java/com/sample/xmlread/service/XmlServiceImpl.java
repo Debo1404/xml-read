@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import com.sample.xmlread.constant.Constant;
 import com.sample.xmlread.dao.XmlRepository;
 import com.sample.xmlread.dto.IPsubnetdto;
 import com.sample.xmlread.exception.FileParsingException;
@@ -32,6 +34,9 @@ public class XmlServiceImpl implements XmlService{
 
 		log.info("*******In XmlServiceImpl::saveData()********");
 		List<IPsubnet> list = XmlUtil.readXml(path);
+		if(CollectionUtils.isEmpty(list)) {
+			throw new FileParsingException(Constant.NO_DATA);
+		}
 		try {
 			xmlRepository.saveAll(list);
 			return true;

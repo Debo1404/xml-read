@@ -22,8 +22,8 @@ public class PathValueExceptionHandler {
 	@ExceptionHandler(FileParsingException.class)
     public ResponseEntity<XmlResponse> toResponse(FileParsingException ex)
     {
-		XmlResponse errorMessage=new XmlResponse(ex.getMessage(), Constant.ERROR_CODE_500);
+		XmlResponse errorMessage=new XmlResponse(ex.getMessage(), Constant.ERROR_CODE_400);
 
-        return new ResponseEntity<XmlResponse>(errorMessage,HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<XmlResponse>(errorMessage,HttpStatus.BAD_REQUEST);
     }
 }
