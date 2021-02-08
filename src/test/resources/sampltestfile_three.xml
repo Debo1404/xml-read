@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tadig-raex-21:TADIGRAEXIR21 xmlns="https://infocentre.gsm.org/TADIG-RAEX-IR21" xmlns:tadig-gen="https://infocentre.gsm.org/TADIG-GEN" xmlns:tadig-raex-21="https://infocentre.gsm.org/TADIG-RAEX-IR21" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://infocentre.gsm.org/TADIG-RAEX-IR21 tadig-raex-ir21-14.0.xsd">
+  <OrganisationInfo>
+    <NetworkList>
+      <Network>
+        <NetworkName>XYZ</NetworkName>
+        <NetworkType>Terrestrial</NetworkType>
+	
+	<IPRoaming_IW_InfoSection>
+            <IPRoaming_IW_Info_General>
+              <EffectiveDateOfChange>2018-06-27</EffectiveDateOfChange>
+              <InterPMNBackboneIPList>
+                <IPAddressOrRange>
+                  <IPAddressRange>127.0.0.1/32</IPAddressRange>
+                </IPAddressOrRange>
+              </InterPMNBackboneIPList>
+              <PMNLocalDNSIPList>
+                <DNSitem>
+                  <IPAddress>1.1.1.1</IPAddress>
+                </DNSitem>
+              </PMNLocalDNSIPList>
+            </IPRoaming_IW_Info_General>
+          </IPRoaming_IW_InfoSection>
+            
+      </Network>
+    </NetworkList>
+  </OrganisationInfo>
+</tadig-raex-21:TADIGRAEXIR21>

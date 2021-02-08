@@ -95,9 +95,6 @@ https://mvnrepository.com/artifact/org.powermock/powermock-module-junit4
 			<configuration>
 				<destFile>${basedir}/target/coverage-reports/jacoco-unit.exec</destFile>
 				<dataFile>${basedir}/target/coverage-reports/jacoco-unit.exec</dataFile>
-				<excludes>
-                        <exclude>**/*com/sample/xmlread/util/XmlUtil.class</exclude>
-                   </excludes>
 			</configuration>
 			<executions>
 				<execution>
@@ -124,6 +121,14 @@ https://mvnrepository.com/artifact/org.powermock/powermock-module-junit4
 			</configuration>
 		</plugin>
 		</plugins>
+
+	<testResources>
+		<testResource>
+			<directory>src/test/resources</directory>
+		</testResource>
+	</testResources>
 	</build>
+
+
 
 </project>
