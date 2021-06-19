@@ -19,16 +19,20 @@ import com.sample.xmlread.response.XmlResponse;
 import com.sample.xmlread.service.XmlService;
 import com.sample.xmlread.validation.XmlValidation;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
+@Api(value="XML Read", description="Operations pertaining to read xm file from given path")
 public class XmlController {
 	
 	@Autowired
 	XmlService xmlService;
 	
 	
+	@ApiOperation(value="Read and save values", notes = "Read xml file, and save in db")
 	@RequestMapping(value = "/xmldata/save", method = RequestMethod.POST,
 			produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity saveData(@RequestBody PathDto pathDto) {
@@ -43,6 +47,8 @@ public class XmlController {
 
 	}
 	
+	
+	@ApiOperation(value="get values", notes = "Display the existing data read from xml files")
 	@RequestMapping(value = "/xmldata/get", method = RequestMethod.GET,
 			produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 	public ResponseEntity getData() {
