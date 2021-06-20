@@ -19,8 +19,7 @@ import com.sample.xmlread.model.IPsubnet;
 public class XmlUtilTest {
 
 	@InjectMocks
-	XmlUtil xmlUtil;
-	
+	XmlUtil xmlUtil;	
 	
 	@Test
 	public void readXmlTest() {
